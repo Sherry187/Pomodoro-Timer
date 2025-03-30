@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pomodoro Timer </title>
+    <style> 
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+
+/* Title Styling */
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 2px solid #bde0fe;
+    border-radius: 10px;
+    background: #e3f2fd;
+}
+
+/* Timer Display */
+#timer {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+/* Button Styling */
+button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 2px solid #6c757d;
+    border-radius: 5px;
+    background-color: #bde0fe;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #48cae4;
+    color: white;
+}
+
+/* Start Button - Green */
+#STARTEU {
+    background-color: #90be6d;
+    border-color: #618264;
+}
+
+#STARTEU:hover {
+    background-color: #66a15d;
+}
+
+/* Pause Button - Yellow */
+#PAUSEU {
+    background-color: #f9c74f;
+    border-color: #d4a83b;
+}
+
+#PAUSEU:hover {
+    background-color: #e3b938;
+}
+
+/* Reset Button - Red */
+#RESETEU {
+    background-color: #f94144;
+    border-color: #c92a2a;
+}
+
+#RESETEU:hover {
+    background-color: #d62828;
+}
+#TIMEREU {
+    font-size: 60px;
+}
+    
+    </style>
+</head>
+<body>
+    <h1 id="TITLEU">Pomodoro Timer</h1>
+    <div id="TIMEREU">25:00</div>
+    <div>
+    <button id="STARTEU">Start</button>
+    <button id="PAUSEU">Pause</button>
+    <button id="RESETEU">Reset</button>
+    </div>
+ 
+    <script>
+        // Select elements
+        const timerDisplay = document.getElementById("TIMEREU");
+        const startBtn = document.getElementById("STARTEU");
+        const pauseBtn = document.getElementById("PAUSEU");
+        const resetBtn = document.getElementById("RESETEUl");
+
+        let timeLeft = 25 * 60; // 25 minutes in seconds
+        let timerInterval;
+        let isRunning = false;
+
+        // Function to update the timer display
+        function updateTimerDisplay() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+        }
+
+        // Start the timer
+        startBtn.addEventListener("click", function () {
+            if (!isRunning) {
+                isRunning = true;
+                timerInterval = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        isRunning = false;
+                        alert("Time's up! Take a break! 🎉");
+                    }
+                }, 1000);
+            }
+        });
+
+        // Pause the timer
+        pauseBtn.addEventListener("click", function () {
+            clearInterval(timerInterval);
+            isRunning = false;
+        });
+
+        // Reset the timer
+        RESETEU.addEventListener("click", function () {
+            clearInterval(timerInterval);
+            timeLeft = 25 * 60; // Reset to 25 minutes
+            updateTimerDisplay();
+            isRunning = false;
+        });
+
+        
+        // Initialize the timer display
+        updateTimerDisplay();
+
+        
+    </script>
+</body>
+</html>
